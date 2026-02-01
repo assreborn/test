@@ -1,72 +1,179 @@
-# Product Automation Tests (Selenium WebDriver)
+Assignment 6 — Data-Driven & Cross-Browser Automated Testing
+Project Title
 
-## Project Description
-This project contains automated UI tests for product and cart functionality
-using Selenium WebDriver with Java and TestNG.
+Data-Driven Login Automation for Thinking Tester Contact List App
 
-The tests are implemented for an e-commerce web application and cover
-adding products to cart, removing products, and verifying cart contents.
-Logging and test reporting are implemented using Log4j and Extent Reports.
+Objective
 
----
+The objective of this assignment is to demonstrate practical skills in:
 
-## Technologies Used
-- Java
-- Selenium WebDriver
-- TestNG
-- Maven
-- Log4j2
-- Extent Reports
+Data-Driven Testing (DDT) using Excel files
 
----
+Automated functional testing using Selenium WebDriver
 
-## Project Structure
-src
-├── main
-│ └── java
-│ ├── base
-│ │ └── BaseTest.java
-│ └── utils
-│ ├── ExtentManager.java
-│ └── ScreenshotUtil.java
-└── test
-└── java
-└── tests
-└── ProductTests.java
+Handling positive and negative test scenarios
+
+Logging test execution results for each data set
+
+Tested Website
+
+URL:
+https://thinking-tester-contact-list.herokuapp.com/
+
+This website provides a login form, which makes it suitable for automated functional testing using different input combinations.
+
+Technologies Used
+
+Programming Language: Java (JDK 21)
+
+Automation Tool: Selenium WebDriver
+
+Test Framework: TestNG
+
+Build Tool: Maven
+
+Excel Library: Apache POI
+
+Browser: Google Chrome
+
+IDE: IntelliJ IDEA
+
+Test Approach — Data-Driven Testing (DDT)
+
+Data-Driven Testing allows executing the same test logic with multiple sets of input data.
+In this project:
+
+Test data is stored in an Excel (.xlsx) file
+
+Each row in Excel represents a separate test case
+
+The test dynamically reads data and executes login scenarios
+
+Both positive and negative cases are covered
+
+Project Structure
+project-root
+│
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── utils
+│   │           └── ExcelReader.java
+│   │
+│   └── test
+│       └── java
+│           └── tests
+│               └── LoginDDTTest.java
+│
+├── testData
+│   └── loginData.xlsx
+│
+├── pom.xml
+└── README.md
+
+Test Data (Excel)
+
+File: testData/loginData.xlsx
+
+Test Case	Email	Password	Expected Result
+TC01	wrong@mail.com
+	wrongpass	ERROR
+TC02	valid@mail.com
+	validpass	SUCCESS
+TC03	valid@mail.com
+		ERROR
+TC04	invalid-email	validpass	ERROR
+Test Scenarios
+Positive Test Case
+
+Login with valid email and password
+
+Expected result: user is redirected to Contact List page
+
+Negative Test Cases
+
+Invalid email and password
+
+Empty password
+
+Invalid email format
+
+Expected result: error message is displayed
+
+Test Logic Description
+
+Test data is read from Excel using ExcelReader
+
+For each data set:
+
+Browser is launched
+
+Login form is filled
+
+Submit button is clicked
+
+Validation:
+
+SUCCESS → URL contains contactList
+
+ERROR → error message is displayed
+
+Each test case result is logged as PASSED or FAILED
+
+Browser is closed after each iteration
+
+To ensure that all data sets are executed, assertions are handled inside try-catch blocks.
+
+Sample Console Output
+TC01 FAILED
+TC02 PASSED
+TC03 PASSED
+TC04 PASSED
 
 
----
+This confirms that:
 
-## Test Environment
-- Browser: Google Chrome
-- OS: Windows
-- Automation Tool: Selenium WebDriver
-- Test Framework: TestNG
+All test data rows were executed
 
----
+The test did not stop after a failure
 
-## Implemented Test Scenarios
-1. Add product to cart
-2. Remove product from cart
-3. Verify product visibility on cart page
+Both positive and negative cases were validated
 
----
+Known Warnings
 
-## Reporting
-- Test execution results are logged using Log4j
-- Extent Reports are generated after test execution
-- Screenshots are captured automatically on test failure
+CDP version warnings related to Chrome browser version
 
----
+Logging warnings related to logger configuration
 
-## How to Run Tests
-1. Install Java and Maven
-2. Clone the project
-3. Open the project in IntelliJ IDEA
-4. Run TestNG tests from ProductTests.java
+These warnings do not affect test execution and are not considered test failures.
 
----
+How to Run the Test
 
-## Notes
-- Login functionality is reused via a helper method
-- Exception handling is implemented to capture screenshots on failure
+Clone the project or extract the archive
+
+Open the project in IntelliJ IDEA
+
+Make sure Maven dependencies are downloaded
+
+Run the test class:
+
+LoginDDTTest.java
+
+
+or use:
+
+mvn test
+
+Conclusion
+
+This project successfully demonstrates:
+
+Data-Driven Testing using Excel
+
+Automated functional testing with Selenium
+
+Handling multiple test scenarios in a single test
+
+Logging individual test execution results
+
+The solution fully meets the requirements of Assignment 6.
